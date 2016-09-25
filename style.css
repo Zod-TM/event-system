@@ -1,0 +1,32 @@
+#menu {
+    float: inherit;
+}
+
+#login {
+    float: initial;
+    display: block;
+}
+
+#img-after-menu {
+    height: 662px;
+    width: 1400px;
+}
+
+#img-after-menu-text {
+    position: absolute;
+    font-size: 100px;
+    top: 250px;
+    left: 400px;
+}
+
+#register {
+    padding: 150px;
+    height: 662px;
+    width: 1400px;
+}
+
+#login {
+    padding: 150px;
+    height: 662px;
+    width: 1400px;
+}
