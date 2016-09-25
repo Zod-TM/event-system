@@ -1,0 +1,30 @@
+{
+  "name": "event-system",
+  "version": "1.0.0",
+  "description": "JS Apps Team Work",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node node_modules/http-server/bin/http-server -p 8881"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Zod-TM/event-system.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Zod-TM/event-system/issues"
+  },
+  "homepage": "https://github.com/Zod-TM/event-system#readme",
+  "dependencies": {
+    "bootstrap": "^3.3.7",
+    "everlive-sdk": "^1.7.2",
+    "http-server": "^0.9.0",
+    "jquery": "^3.1.1",
+    "navigo": "^3.0.0",
+    "systemjs": "^0.19.38",
+    "systemjs-plugin-babel": "0.0.15",
+    "toastr": "^2.1.2"
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "name": "event-system",
+  "description": "JS Apps Team Work",
+  "main": "index.js",
+  "authors": [],
+  "license": "ISC",
+  "homepage": "https://github.com/Zod-TM/event-system",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
