@@ -1,17 +1,17 @@
 const handlebars = window.handlebars || window.Handlebars,
-    cache = {};
+    templateCache = {};
 
-function get(name) {
+function getTemplate(templateName) {
     let promise = new Promise(function (resolve, reject) {
-        if (cache[name]) {
-            resolve(cache[name]);
+        if (templateCache[templateName]) {
+            resolve(templateCache[templateName]);
             return;
         }
 
-        let url = `../templates/${name}.handlebars`;
+        let url = `../templates/${templateName}.handlebars`;
         $.get(url, function (html) {
             let template = handlebars.compile(html);
-            cache[name] = template;
+            templateCache[templateNamename] = template;
             resolve(template);
         });
     });
@@ -19,4 +19,4 @@ function get(name) {
     return promise;
 }
 
-export { get };
+export { getTemplate };

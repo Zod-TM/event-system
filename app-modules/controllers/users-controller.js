@@ -1,8 +1,8 @@
 import { register as registerUser, login as loginUser } from 'backendServices';
-import { get } from 'templates';
+import { getTemplate } from 'templates';
 
 function register() {
-    get('register')
+    getTemplate('register')
         .then(function (template) {
             $('#content').html(template());
 
@@ -22,7 +22,7 @@ function register() {
 }
 
 function login() {
-    get('login')
+    getTemplate('login')
         .then(function (template) {
             $('#content').html(template());
 
