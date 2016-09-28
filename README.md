@@ -1,2 +1,2 @@
 # event-system
-Awesome javascript application for organizing your events
+Awesome javascript application for organizing awesome events
