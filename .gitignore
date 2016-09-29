@@ -46,3 +46,6 @@ jspm_packages
 /test/sample
 !/test/sample/bower.json
 /npm-shrinkwrap.json
+
+#VScode
+.vscode/
