@@ -1,4 +1,4 @@
-const apiKey = 'fwgjsmld45ozyw0n',
+const apiKey = '41vzn3bx8qqhv7v0',
     everlive = new Everlive(apiKey);
 
 function register(user) {
