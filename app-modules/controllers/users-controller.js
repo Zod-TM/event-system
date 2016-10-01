@@ -38,7 +38,6 @@ function login() {
                     .then(function () {
                         window.location = '/#';
                         toastr.success('You are logged in!');
-                        isLoggedIn().then((result) => console.log(result));
                     });
             });
         });

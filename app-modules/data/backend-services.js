@@ -34,9 +34,19 @@ function login(user) {
     return promise;
 }
 
-function isLoggedIn() {
+function getCurrentUser() {
     let promise = new Promise((resolve, reject) => {
         everlive.Users.currentUser()
+            .then(resolve)
+            .catch(reject);
+    });
+
+    return promise;
+}
+
+function isLoggedIn() {
+    let promise = new Promise((resolve, reject) => {
+        getCurrentUser()
             .then((data) => {
                 resolve(!!data.result);
             });
@@ -45,4 +55,4 @@ function isLoggedIn() {
     return promise;
 }
 
-export { register, login, isLoggedIn };
+export { register, login, getCurrentUser, isLoggedIn };
