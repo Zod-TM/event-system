@@ -78,4 +78,4 @@ function getAllEvents(){
 }
 
 
-export { register, login, isLoggedIn, getAllEvents, logout, getCurrentUser };
+export { register, login, isLoggedIn, getAllEvents, logout, getCurrentUser, everlive };

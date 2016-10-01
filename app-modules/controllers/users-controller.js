@@ -59,7 +59,8 @@ function login() {
             $('#btn-login').on('click', function () {
                 var user = {
                     username: $('#tb-login-username').val(),
-                    password: $('#tb-login-pass').val()
+                    password: $('#tb-login-pass').val(),
+                    subscribedEvents: []
                 };
 
                 loginUser(user)

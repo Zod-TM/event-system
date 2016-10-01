@@ -1,5 +1,5 @@
 import { get as template } from 'templateLoader';
-import {getAllEvents} from 'backendServices';
+import {getAllEvents, everlive} from 'backendServices';
 
 function all(){
     var result;
@@ -26,13 +26,36 @@ function saveEvent(){
 
         var postID = $target.parents('.post').attr('id');
 
-        // //get user ID
-        // // Everlive.Events.beforeCreate(function (request, context, done) {
-        // // var userID = request.data.Id;
-        // var getCurrentUserId = function(){
-        //         if(Everlive.Users.currentUser.data)
-        //             return app.Users.currentUser.data.Id;
-        //     }
+        everlive.Users.currentUser()
+            .then(function(user){
+                var subsriberId = user.result.Id;
+
+                var subscriberData = everlive.data('Subscriber');
+
+                var object = {
+                    'User': subsriberId,
+                    'Events': [postID]
+                }
+
+                $.ajax({
+                    type: "PUT",
+                    url: 'http://api.everlive.com/v1/41vzn3bx8qqhv7v0/Subscriber/',
+                    contentType: "application/json",
+                    data: JSON.stringify(object),
+                    success: function(data){
+                        console.log(JSON.stringify(data));
+                        console.log('added successfully');
+                    },
+                    error: function(error){
+                        console.log(JSON.stringify(error));
+                    }
+                })
+            });
+
+        
+                //if(Everlive.Users.currentUser.data)
+                    //return app.Users.currentUser.data.Id;
+         //   }
 
         // //populate the event ID against the user ID
         // var dataSubscriber = everlive.data('Subscriber');
