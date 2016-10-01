@@ -44,4 +44,8 @@ function login() {
         });
 }
 
-export { register, login };
+function subscribe() {
+    
+}
+
+export { register, login, subscribe };

@@ -10,8 +10,10 @@ function get(templateName) {
 
         let url = `../templates/${templateName}.handlebars`;
         $.get(url, function (html) {
+            
             let template = handlebars.compile(html);
             cache [templateName] = template;
+            //console.log(template);
             resolve(template);
         });
     });

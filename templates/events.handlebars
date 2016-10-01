@@ -1,0 +1,42 @@
+
+<div id="posts-container"> 
+    {{#each result}}
+    <div class="post" id="{{Id}}">
+            <a href="http://www.eventbrite.com/e/saturday-night-party-sky-room-tickets-15631775060?aff=ehomecard" class="poster-card__main">
+                <div class="poster-card__header">
+                    <div class="poster-card__image" >
+                        <img class="js-poster-image " src="https://img.evbuc.com/https%3A%2F%2Fcdn.evbuc.com%2Fimages%2F24621630%2F24250841862%2F1%2Foriginal.jpg?h=230&amp;w=460&amp;s=4477628a4d9547cf62b0339dbe879d39" alt="SATURDAY NIGHT PARTY SKY ROOM tickets">
+                    </div>
+                    <span class="poster-card__label">Free</span>
+                </div>
+                <div class="poster-card-body">
+                    <time class="poster-card__date">{{dateTime}}
+                    </time>
+                    <div class="poster-card-title">
+                        {{subject}}
+                    </div>
+                    <div class="poster-card__venue">
+                        <!--{{location.Latitude}} -->
+                        <!--{{location.Longitude}}-->
+                    </div>
+                </div>
+            </a>
+            <div class="poster-card__footer">
+                    <div class="poster-card__actions">
+                        <a class="share-action" href="#" data-eid="15631775060" title="Share">
+                            <button type="button" class="btn-primary">
+                                <span>Share</span>
+                            </button>
+                        </a>
+                        <a class="bookmark" title="Save">
+                            <a class="save-action" href="#" data-eid="15631775060" title="Save">
+                                <button type="button" class="btn-primary" class="saveButton">
+                                    <span>Save</span>
+                                </button>
+                            </a>
+                        </a>
+                    </div>
+            </div>
+    </div>
+    {{/each}}
+</div>

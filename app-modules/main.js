@@ -6,3 +6,5 @@ router.on('#register', () => register())
     .on('#login', () => login())
     .on('#', () => homeAll())
     .resolve();
+
+

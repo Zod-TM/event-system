@@ -45,4 +45,15 @@ function isLoggedIn() {
     return promise;
 }
 
-export { register, login, isLoggedIn };
+function getAllEvents(){
+    
+    let promise = new Promise((resolve, reject) => {
+        everlive.data('Events').get()
+            .then(resolve);
+    });
+
+    return promise;
+}
+
+
+export { register, login, isLoggedIn, getAllEvents };

@@ -26,3 +26,10 @@
     height: 662px;
     width: 1400px;
 }
+
+.post {
+    display: inline-block;
+    max-width: 350px;
+    max-height: 350px;
+    margin: 50px;
+}
