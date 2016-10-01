@@ -80,4 +80,12 @@ function logout() {
         })
 }
 
-export { register, login, logout };
+function contactUs() {
+    console.log(11);
+    getTemplate('contactUs')
+        .then((template) => {
+            $('#content').html(template());
+        })
+}
+
+export { register, login, logout, contactUs };
