@@ -25,10 +25,10 @@ function all(){
 
 function saveEvent(){   
     $('.saveButton').on('click', function(ev){
-        console.log(123);
         var $target = $(ev.target);
-        var postID = $target.parents('#post').attr('id');
-        console.log(postID);
+
+        var postID = $target.parents('.post').attr('id');
+
         // //get user ID
         // // Everlive.Events.beforeCreate(function (request, context, done) {
         // // var userID = request.data.Id;

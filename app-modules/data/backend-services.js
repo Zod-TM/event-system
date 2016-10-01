@@ -28,7 +28,9 @@ function login(user) {
     let promise = new Promise((resolve, reject) => {
         everlive.authentication.login(user.username, user.password)
             .then(resolve)
-            .catch(reject);
+            .catch(reject => {
+                toastr.error(reject.message);
+            });
     });
 
     return promise;

@@ -4,15 +4,17 @@
 }
 
 #img-after-menu {
-    height: 662px;
-    width: 1400px;
+    background-image: url("../images/back-img.jpg");
+    height: 350px;
+    background-size: cover;
 }
 
 #img-after-menu-text {
+    color: slategrey;
     position: absolute;
     font-size: 100px;
-    top: 250px;
-    left: 400px;
+    top: 150px;
+    left: 600px;
 }
 
 #register {
