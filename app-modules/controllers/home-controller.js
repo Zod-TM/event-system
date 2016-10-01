@@ -23,8 +23,7 @@ function all(){
     
 };
 
-function saveEvent(){
-
+function saveEvent(){   
     $('.saveButton').on('click', function(ev){
         console.log(123);
         var $target = $(ev.target);
