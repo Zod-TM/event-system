@@ -4,7 +4,7 @@ const everlive = new Everlive({
     authentication: {
         persist: true,
         onAuthenticationRequired: () => {
-            window.location('/#login')
+            window.location = '/#login';
         }
     }
 });
@@ -34,9 +34,29 @@ function login(user) {
     return promise;
 }
 
-function isLoggedIn() {
+function logout() {
+    let promise = new Promise((resolve, reject) => {
+        everlive.authentication.logout()
+            .then(resolve)
+            .catch(reject);
+    });
+
+    return promise;
+}
+
+function getCurrentUser() {
     let promise = new Promise((resolve, reject) => {
         everlive.Users.currentUser()
+            .then(resolve)
+            .catch(reject);
+    });
+
+    return promise;
+}
+
+function isLoggedIn() {
+    let promise = new Promise((resolve, reject) => {
+        getCurrentUser()
             .then((data) => {
                 resolve(!!data.result);
             });
@@ -56,4 +76,4 @@ function getAllEvents(){
 }
 
 
-export { register, login, isLoggedIn, getAllEvents };
+export { register, login, isLoggedIn, getAllEvents, logout, getCurrentUser };

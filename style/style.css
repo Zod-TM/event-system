@@ -33,3 +33,20 @@
     max-height: 350px;
     margin: 50px;
 }
+.fb-like {
+    position: absolute;
+    top: 70px;
+    left: 400px;
+}
+
+#menu-items .hidden-when-not-logged-in {
+    display: none;
+}
+
+#menu-items.logged-in .hidden-when-not-logged-in {
+    display: block;
+}
+
+#menu-items.logged-in .visible-when-not-logged-in {
+    display: none;
+}
