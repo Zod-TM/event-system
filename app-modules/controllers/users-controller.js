@@ -1,9 +1,9 @@
-import { register as registerUser, login as loginUser, isLoggedIn } from 'backendServices';
+import { register as registerUser, login as loginUser, isLoggedIn, logout as logoutUser } from 'backendServices';
 import { get as getTemplate } from 'templateLoader';
 
 function register() {
     getTemplate('register')
-        .then(function (template) {
+        .then((template) => {
             $('#content').html(template());
 
             $('#btn-register').on('click', function () {
@@ -16,7 +16,7 @@ function register() {
 
                 registerUser(user)
                     .then(function () {
-                        window.location = '/#';
+                        window.location.href = '/#';
                         toastr.success('User registered!');
                     });
             });
@@ -25,7 +25,7 @@ function register() {
 
 function login() {
     getTemplate('login')
-        .then(function (template) {
+        .then((template) => {
             $('#content').html(template());
 
             $('#btn-login').on('click', function () {
@@ -36,11 +36,19 @@ function login() {
 
                 loginUser(user)
                     .then(function () {
-                        window.location = '/#';
+                        window.location.href = '/#';
+                        $('#menu-items').addClass('logged-in');
                         toastr.success('You are logged in!');
                     });
             });
         });
 }
 
-export { register, login };
+function logout() {
+    logoutUser()
+        .then(() => {
+            $('#menu-items').removeClass('logged-in');
+        })
+}
+
+export { register, login, logout };

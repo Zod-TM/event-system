@@ -30,6 +30,17 @@
 .fb-like {
     position: absolute;
     top: 70px;
-    right: 400px;
-    /*margin: auto;*/
+    left: 400px;
+}
+
+#menu-items .hidden-when-not-logged-in {
+    display: none;
+}
+
+#menu-items.logged-in .hidden-when-not-logged-in {
+    display: block;
+}
+
+#menu-items.logged-in .visible-when-not-logged-in {
+    display: none;
 }
