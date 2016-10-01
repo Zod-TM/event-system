@@ -9,10 +9,7 @@ function all(){
     .then(function(data){
         result = data;
         template('events')
-            .then(function(template){
-                // console.log(template(result));
-                // console.log(result);
-                
+            .then(function(template){       
                  $('#content').html(template(result));
                  saveEvent();
             })

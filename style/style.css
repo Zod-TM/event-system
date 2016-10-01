@@ -52,3 +52,12 @@
 #menu-items.logged-in .visible-when-not-logged-in {
     display: none;
 }
+
+img  {
+    width : 350px;
+    height : 200px;
+}
+
+.post a {
+    text-decoration:none
+}
