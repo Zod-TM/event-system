@@ -7,6 +7,6 @@ SystemJS.config({
         'backendServices': '../../app-modules/data/backend-services.js',
         'usersController': '../../app-modules/controllers/users-controller.js',
         'homeController': '../../app-modules/controllers/home-controller.js',
-        'templates': '../../app-modules/template-loader.js'
+        'templateLoader': '../../app-modules/template-loader.js'
     }
 });

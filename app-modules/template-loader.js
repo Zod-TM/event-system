@@ -11,7 +11,7 @@ function get(templateName) {
         let url = `../templates/${templateName}.handlebars`;
         $.get(url, function (html) {
             let template = handlebars.compile(html);
-            cache [templateNamename] = template;
+            cache [templateName] = template;
             resolve(template);
         });
     });

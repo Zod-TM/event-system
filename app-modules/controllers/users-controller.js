@@ -1,28 +1,30 @@
-import { register as registerUser, login as loginUser } from 'backendServices';
-import { get } from 'templates';
+import { register as registerUser, login as loginUser, isLoggedIn } from 'backendServices';
+import { get as getTemplate } from 'templateLoader';
 
 function register() {
-    get('register')
+    getTemplate('register')
         .then(function (template) {
             $('#content').html(template());
 
             $('#btn-register').on('click', function () {
                 var user = {
                     username: $('#tb-reg-username').val(),
-                    password: $('#tb-reg-pass').val()
+                    password: $('#tb-reg-pass').val(),
+                    firstName: $('#tb-first-name').val(),
+                    secondName: $('#tb-second-name').val()
                 };
 
                 registerUser(user)
                     .then(function () {
+                        window.location = '/#';
                         toastr.success('User registered!');
-                        window.location.href = '/index.html';
                     });
             });
         });
 }
 
 function login() {
-    get('login')
+    getTemplate('login')
         .then(function (template) {
             $('#content').html(template());
 
@@ -34,8 +36,9 @@ function login() {
 
                 loginUser(user)
                     .then(function () {
+                        window.location = '/#';
                         toastr.success('You are logged in!');
-                        window.location.href = '/index.html';
+                        isLoggedIn().then((result) => console.log(result));
                     });
             });
         });
