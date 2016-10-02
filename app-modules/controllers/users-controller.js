@@ -81,11 +81,4 @@ function logout() {
         })
 }
 
-function contactUs() {
-    getTemplate('contactUs')
-        .then((template) => {
-            $('#content').html(template());
-        })
-}
-
-export { register, login, logout, contactUs };
+export { register, login, logout };

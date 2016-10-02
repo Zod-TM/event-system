@@ -13,7 +13,6 @@ function get(templateName) {
             
             let template = handlebars.compile(html);
             cache[templateName] = template;
-            //console.log(template);
             resolve(template);
         });
     });

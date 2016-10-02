@@ -38,28 +38,26 @@ function attachSaveEventHandler() {
     })
 }
 
-    function showSubscribedEvents()
-    {
-        let result;
-        getCurrentUser()
-            .then(function (user) {
-                var userId = user.Id;
-                return getSubscriberByUserId(userId)
-            })
-            .then(function (subscriber) {
-                return getSubscribedEvents(subscriber)
-            })
-            .then(function(data){
-                data.result = data.Result;
-                console.log(data);
-                result = data;
-                return getTemplate('events')
-            })
-            .then(function(template){
-                $('#content').html(template(result));
-                attachSaveEventHandler();
-            })
+function showSubscribedEvents() {
+    let result;
+    getCurrentUser()
+        .then(function (user) {
+            var userId = user.Id;
+            return getSubscriberByUserId(userId);
+        })
+        .then(function (subscriber) {
+            return getSubscribedEvents(subscriber);
+        })
+        .then(function (data) {
+            data.result = data.Result || [];
+            result = data;
+            let templateName = data.result.length > 0 ? 'events' : 'no-events';
+            return getTemplate(templateName);
+        })
+        .then(function (template) {
+            $('#content').html(template(result));
+        })
 
-    }
+}
 
 export { all, showSubscribedEvents };

@@ -69,6 +69,10 @@
     display: none;
 }
 
+.no-events {
+    font-size: 2em;
+}
+
 img {
     width: 350px;
     height: 200px;
