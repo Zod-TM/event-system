@@ -1,5 +1,5 @@
 import { get as template } from 'templateLoader';
-import {getAllEvents, everlive} from 'backendServices';
+import {getAllEvents, everlive, getSubscriberByUserId, addEventToSubscriber} from 'backendServices';
 
 function all(){
     var result;
@@ -28,58 +28,18 @@ function saveEvent(){
 
         everlive.Users.currentUser()
             .then(function(user){
-                var subsriberId = user.result.Id;
+                var userId = user.result.Id;
 
-                var subscriberData = everlive.data('Subscriber');
+                getSubscriberByUserId(userId)
+                    .then(function(subscriber){
 
-                var object = {
-                    'User': subsriberId,
-                    'Events': [postID]
-                }
+                        addEventToSubscriber(subscriber, postID)
+                            .then(function(data){
+                                console.log(data);
+                            });
+                    })
 
-                $.ajax({
-                    type: "PUT",
-                    url: 'http://api.everlive.com/v1/41vzn3bx8qqhv7v0/Subscriber/',
-                    contentType: "application/json",
-                    data: JSON.stringify(object),
-                    success: function(data){
-                        console.log(JSON.stringify(data));
-                        console.log('added successfully');
-                    },
-                    error: function(error){
-                        console.log(JSON.stringify(error));
-                    }
-                })
             });
-
-        
-                //if(Everlive.Users.currentUser.data)
-                    //return app.Users.currentUser.data.Id;
-         //   }
-
-        // //populate the event ID against the user ID
-        // var dataSubscriber = everlive.data('Subscriber');
-        
-        // // var object = {
-        // //     data.User : subscriberId;
-        // //     data.Events : postID;
-        // // };
-
-        // $.ajax({
-        //     type: "PUT",
-        //     url: 'http://api.everlive.com/v1/41vzn3bx8qqhv7v0/Subscriber/' + dataSubscriberID ,
-        //     contentType: "application/json",
-        //     data: JSON.stringify(object),
-        //     success: function (data) {
-                
-        //         // console.log("added succesfully")
-        //         // console.log(JSON.stringify(data));
-        //     },
-        //     error: function (error) {
-        //         alert(JSON.stringify(error));
-        //     }
-        // })
-
     })
 }
 

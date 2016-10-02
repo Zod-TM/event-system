@@ -67,8 +67,8 @@ function isLoggedIn() {
     return promise;
 }
 
-function getAllEvents(){
-    
+function getAllEvents() {
+
     let promise = new Promise((resolve, reject) => {
         everlive.data('Events').get()
             .then(resolve);
@@ -77,5 +77,58 @@ function getAllEvents(){
     return promise;
 }
 
+function getSubscriberByUserId(userId) {
+    let promise = new Promise(function (resolve, reject) {
+        $.ajax({
+            type: 'GET',
+            url: `http://api.everlive.com/v1/41vzn3bx8qqhv7v0/Subscriber?filter={"User":"${userId}"}`,
+            contentType: "application/json",
+            success: function (data) {
+                let subscriber = data.Result[0];
+                resolve(subscriber);
+            },
+            error: function (data) {
+                reject(data);
+            }
+        });
+    });
 
-export { register, login, isLoggedIn, getAllEvents, logout, getCurrentUser, everlive };
+    return promise;
+}
+
+function addEventToSubscriber(subscriber, postID) {
+    let promise = new Promise(function (resolve, reject) {
+        let events = [];
+        events.push(...subscriber.Events);
+
+        for(let i = 0; i < events.length; i += 1){
+            if(events[i] === postID){
+                return;
+            }
+        };
+
+        events.push(postID);
+
+        var object = {
+            'Events': events
+        }
+
+        $.ajax({
+            type: "PUT",
+            url: 'http://api.everlive.com/v1/41vzn3bx8qqhv7v0/Subscriber/' + subscriber.Id, 
+            contentType: "application/json",
+            data: JSON.stringify(object),
+            success: function (data) {
+                resolve(data);
+            },
+            error: function (error) {
+                reject(error);
+            }
+        });
+    });
+    
+    return promise;
+}
+
+
+export { register, login, isLoggedIn, getAllEvents, logout, getCurrentUser, everlive, getSubscriberByUserId, addEventToSubscriber };
