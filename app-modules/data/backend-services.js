@@ -9,6 +9,8 @@ const everlive = new Everlive({
     }
 });
 
+const EVERLIVE_AUTHENTICATION_KEY = '__everlive_auth_key41vzn3bx8qqhv7v0$authentication';
+
 function register(user) {
     let displayName = `${user.firstName} ${user.secondName}`,
         attrs = {
@@ -49,7 +51,10 @@ function logout() {
 function getCurrentUser() {
     let promise = new Promise((resolve, reject) => {
         everlive.Users.currentUser()
-            .then(resolve)
+            .then((data) => {
+                let user = data.result;
+                resolve(user);
+            })
             .catch(reject);
     });
 
@@ -57,14 +62,7 @@ function getCurrentUser() {
 }
 
 function isLoggedIn() {
-    let promise = new Promise((resolve, reject) => {
-        getCurrentUser()
-            .then((data) => {
-                resolve(!!data.result);
-            });
-    });
-
-    return promise;
+    return Promise.resolve(!!localStorage.getItem(EVERLIVE_AUTHENTICATION_KEY));
 }
 
 function getAllEvents() {
@@ -101,8 +99,9 @@ function addEventToSubscriber(subscriber, postID) {
         let events = [];
         events.push(...subscriber.Events);
 
-        for(let i = 0; i < events.length; i += 1){
-            if(events[i] === postID){
+        for (let i = 0; i < events.length; i += 1) {
+            if (events[i] === postID) {
+                reject();
                 return;
             }
         };
@@ -115,7 +114,7 @@ function addEventToSubscriber(subscriber, postID) {
 
         $.ajax({
             type: "PUT",
-            url: 'http://api.everlive.com/v1/41vzn3bx8qqhv7v0/Subscriber/' + subscriber.Id, 
+            url: 'http://api.everlive.com/v1/41vzn3bx8qqhv7v0/Subscriber/' + subscriber.Id,
             contentType: "application/json",
             data: JSON.stringify(object),
             success: function (data) {
@@ -126,9 +125,9 @@ function addEventToSubscriber(subscriber, postID) {
             }
         });
     });
-    
+
     return promise;
 }
 
 
-export { register, login, isLoggedIn, getAllEvents, logout, getCurrentUser, everlive, getSubscriberByUserId, addEventToSubscriber };
+export { register, login, isLoggedIn, getAllEvents, logout, getCurrentUser, getSubscriberByUserId, addEventToSubscriber };

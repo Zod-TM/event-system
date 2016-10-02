@@ -1,44 +1,38 @@
-import { get as template } from 'templateLoader';
-import {getAllEvents, everlive, getSubscriberByUserId, addEventToSubscriber} from 'backendServices';
+import { get as getTemplate } from 'templateLoader';
+import { getAllEvents, getSubscriberByUserId, addEventToSubscriber, getCurrentUser } from 'backendServices';
 
-function all(){
+function all() {
     var result;
-    
 
     getAllEvents()
-    .then(function(data){
-        result = data;
-        template('events')
-            .then(function(template){       
-                 $('#content').html(template(result));
-                 saveEvent();
-            })
-    },
-    function(error){
-        alert(JSON.stringify(error));
-    })
-    
+        .then(function (data) {
+            result = data;
+            return getTemplate('events');
+        })
+        .then(function (template) {
+            $('#content').html(template(result));
+            attachSaveEventHandler();
+        });
 };
 
-function saveEvent(){   
-    $('.saveButton').on('click', function(ev){
+function attachSaveEventHandler() {
+    $('.saveButton').on('click', function (ev) {
         var $target = $(ev.target);
+        var eventID = $target.parents('.post').attr('id');
 
-        var postID = $target.parents('.post').attr('id');
-
-        everlive.Users.currentUser()
-            .then(function(user){
-                var userId = user.result.Id;
-
-                getSubscriberByUserId(userId)
-                    .then(function(subscriber){
-
-                        addEventToSubscriber(subscriber, postID)
-                            .then(function(data){
-                                console.log(data);
-                            });
-                    })
-
+        getCurrentUser()
+            .then(function (user) {
+                var userId = user.Id;
+                return getSubscriberByUserId(userId)
+            })
+            .then(function (subscriber) {
+                return addEventToSubscriber(subscriber, eventID);
+            })
+            .then(function () {
+                toastr.success('Successfully joined event!');
+            })
+            .catch(function () {
+                toastr.error("Error occured or event is already joined!");
             });
     })
 }

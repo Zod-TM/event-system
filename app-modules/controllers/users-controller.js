@@ -82,7 +82,6 @@ function logout() {
 }
 
 function contactUs() {
-    console.log(11);
     getTemplate('contactUs')
         .then((template) => {
             $('#content').html(template());
