@@ -2,7 +2,7 @@
   "name": "event-system",
   "version": "1.0.0",
   "description": "JS Apps Team Work",
-  "main": "server.js",
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node node_modules/http-server/bin/http-server -p 8881"
