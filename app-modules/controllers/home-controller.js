@@ -1,11 +1,12 @@
 import { get as getTemplate } from 'templateLoader';
-import { getAllEvents, getSubscriberByUserId, addEventToSubscriber, getCurrentUser } from 'backendServices';
+import { getAllEvents, getSubscriberByUserId, addEventToSubscriber, getCurrentUser, getSubscribedEvents } from 'backendServices';
 
 function all() {
     var result;
 
     getAllEvents()
         .then(function (data) {
+            console.log(data);
             result = data;
             return getTemplate('events');
         })
@@ -37,5 +38,28 @@ function attachSaveEventHandler() {
     })
 }
 
+    function showSubscribedEvents()
+    {
+        let result;
+        getCurrentUser()
+            .then(function (user) {
+                var userId = user.Id;
+                return getSubscriberByUserId(userId)
+            })
+            .then(function (subscriber) {
+                return getSubscribedEvents(subscriber)
+            })
+            .then(function(data){
+                data.result = data.Result;
+                console.log(data);
+                result = data;
+                return getTemplate('events')
+            })
+            .then(function(template){
+                $('#content').html(template(result));
+                attachSaveEventHandler();
+            })
 
-export { all };
+    }
+
+export { all, showSubscribedEvents };

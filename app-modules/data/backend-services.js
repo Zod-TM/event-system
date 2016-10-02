@@ -19,7 +19,27 @@ function register(user) {
 
     let promise = new Promise((resolve, reject) => {
         everlive.Users.register(user.username, user.password, attrs)
-            .then(resolve)
+            .then(function (data) {
+                let userId = data.result.Id;
+
+                let body = {
+                    'User': userId,
+                    'Events': []
+                }
+
+                $.ajax({
+                    type: 'POST',
+                    url: 'http://api.everlive.com/v1/41vzn3bx8qqhv7v0/Subscriber',
+                    contentType: "application/json",
+                    data: JSON.stringify(body),
+                    success: function (data) {
+                        resolve();
+                    },
+                    error: function (error) {
+                        reject();
+                    }
+                });
+            })
             .catch(reject);
     });
 
@@ -42,7 +62,7 @@ function logout() {
     let promise = new Promise((resolve, reject) => {
         everlive.authentication.logout()
             .then(resolve)
-            .catch(reject);
+            .catch(data => console.log(data));
     });
 
     return promise;
@@ -129,5 +149,27 @@ function addEventToSubscriber(subscriber, postID) {
     return promise;
 }
 
+function getSubscribedEvents(subscriber) {
+    let promise = new Promise(function (resolve, reject) {
+        var filter = {
+            "Id": { "$in": subscriber.Events }
+        };
 
-export { register, login, isLoggedIn, getAllEvents, logout, getCurrentUser, getSubscriberByUserId, addEventToSubscriber };
+        $.ajax({
+            url: `http://api.everlive.com/v1/41vzn3bx8qqhv7v0/Events`,
+            type: "GET",
+            headers: { "X-Everlive-Filter": JSON.stringify(filter) },
+            success: function (data) {
+                resolve(data);
+            },
+            error: function (error) {
+                reject(error);
+            }
+        });
+    });
+
+    return promise;
+}
+
+
+export { register, login, isLoggedIn, getAllEvents, logout, getCurrentUser, getSubscriberByUserId, addEventToSubscriber, getSubscribedEvents };
