@@ -9,6 +9,7 @@ SystemJS.config({
         'homeController': '../../app-modules/controllers/home-controller.js',
         'contactController': '../../app-modules/controllers/contact-controller.js',
         'templateLoader': '../../app-modules/utils/template-loader.js',
-        'requester': '../../app-modules/utils/requester.js'
+        'requester': '../../app-modules/utils/requester.js',
+        'externalEvents' : '../../app-modules/controllers/external-eventbrite.js'
     }
 });

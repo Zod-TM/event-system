@@ -2,6 +2,7 @@ import { register, login, logout } from 'usersController';
 import { all as homeAll, showSubscribedEvents} from 'homeController';
 import { isLoggedIn } from 'backendServices';
 import { contactUs} from 'contactController';
+import { activateExternalFeed } from 'externalEvents';
 
 let router = new Navigo(null, false);
 router
@@ -21,3 +22,7 @@ isLoggedIn()
             $('#menu-items').addClass('logged-in');
         }
     });
+
+
+activateExternalFeed();
+

@@ -1,0 +1,36 @@
+<div id="posts-container2" class="xx"> 
+    {{#each objects}}
+    <div class="post" id="{{Id}}">
+            <a href="http://www.eventbrite.com/e/saturday-night-party-sky-room-tickets-15631775060?aff=ehomecard" class="poster-card__main">
+                <div class="poster-card__header">
+                    <div class="poster-card__image" >
+                        <img class="js-poster-image" src="{{url}}" alt="{{subject}}">
+                    </div>
+                </div>
+                <div class="poster-card-body">
+                    <time class="poster-card__date">{{date}}
+                    </time>
+                    <div class="poster-card-title">
+                        {{subject}}
+                    </div>
+                </div>
+            </a>
+            <div class="poster-card__footer">
+                    <div class="poster-card__actions">
+                        <a class="share-action" href="#" title="Share">
+                            <button type="button" class="btn-primary">
+                                <span>Share</span>
+                            </button>
+                        </a>
+                        <a class="bookmark" title="Save">
+                            <a class="save-action" href="#" data-eid="15631775060" title="Save">
+                                <button type="button" class="btn-primary saveButton">
+                                    <span>Join</span>
+                                </button>
+                            </a>
+                        </a>
+                    </div>
+            </div>
+    </div>
+    {{/each}}
+</div>
