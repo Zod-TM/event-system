@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Event System</title>
+    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap-theme.css">
+    <link rel="stylesheet" href="../node_modules/toastr/package/toastr.css">
+    <link rel="stylesheet" href="../style/style.css">
+    <link rel="stylesheet" href="../node_modules/mocha/mocha.css">
+</head>
+
+<body>
+    <div id="mocha"></div>
+
+    <!--Tests-->
+    <script src="../node_modules/mocha/mocha.js"></script>
+    <script src="../node_modules/chai/chai.js"></script>
+    <script src="../node_modules/sinon/pkg/sinon-1.17.6.js"></script>
+
+    <script src="../node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="../node_modules/systemjs/dist/system.js"></script>
+    <script src="../node_modules/everlive-sdk/dist/everlive.all.min.js"></script>
+    <script src="../node_modules/navigo/lib/navigo.min.js"></script>
+    <script src="../node_modules/toastr/toastr.js"></script>
+    <script src="../node_modules/handlebars/dist/handlebars.min.js"></script>
+
+    <script src="../app-modules/config/system-config.js"></script>
+    <script>
+        System.import('tests');
+    </script>
+
+    <script src="../social-scripts/facebook-sdk.js"></script>
+</body>
+
+
+</html>

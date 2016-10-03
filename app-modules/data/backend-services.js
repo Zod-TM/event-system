@@ -1,15 +1,5 @@
-import { get, put, post } from 'requester';
-
-const everlive = new Everlive({
-    appId: "41vzn3bx8qqhv7v0",
-    scheme: "https",
-    authentication: {
-        persist: true,
-        onAuthenticationRequired: () => {
-            window.location = '/#login';
-        }
-    }
-});
+import { requester } from 'requester';
+import { everlive } from 'everliveSetup';
 
 const EVERLIVE_AUTHENTICATION_KEY = '__everlive_auth_key41vzn3bx8qqhv7v0$authentication';
 
@@ -44,7 +34,7 @@ function createSubsciber(userId) {
         body
     }
 
-    return post(requestData);
+    return requester.post(requestData);
 }
 
 function login(user) {
@@ -103,7 +93,7 @@ function getSubscriberByUserId(userId) {
             url
         }
 
-        get(requestData)
+        requester.get(requestData)
             .then((data) => {
                 let subscriber = data.Result[0];
                 resolve(subscriber);
@@ -137,7 +127,7 @@ function addEventToSubscriber(subscriber, postID) {
             body
         }
 
-        put(requestData)
+        requester.put(requestData)
             .then(resolve)
             .catch(reject);
     });
@@ -159,7 +149,7 @@ function getSubscribedEvents(subscriber) {
             headers
         }
 
-        get(requestData)
+        requester.get(requestData)
             .then(resolve)
             .catch(reject);
     });

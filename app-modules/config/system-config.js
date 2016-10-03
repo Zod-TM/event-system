@@ -5,10 +5,12 @@ SystemJS.config({
         'systemjs-babel-build': '../../node_modules/systemjs-plugin-babel/systemjs-babel-browser.js',
         'main': '../../app-modules/main.js',
         'backendServices': '../../app-modules/data/backend-services.js',
+        'everliveSetup': '../../app-modules/data/everlive-setup.js',
         'usersController': '../../app-modules/controllers/users-controller.js',
         'homeController': '../../app-modules/controllers/home-controller.js',
         'contactController': '../../app-modules/controllers/contact-controller.js',
         'templateLoader': '../../app-modules/utils/template-loader.js',
-        'requester': '../../app-modules/utils/requester.js'
+        'requester': '../../app-modules/utils/requester.js',
+        'tests': '../../tests/tests.js'
     }
 });
