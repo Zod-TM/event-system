@@ -1,3 +1,5 @@
+import { get, put, post } from 'requester';
+
 const everlive = new Everlive({
     appId: "41vzn3bx8qqhv7v0",
     scheme: "https",
@@ -22,28 +24,27 @@ function register(user) {
             .then(function (data) {
                 let userId = data.result.Id;
 
-                let body = {
-                    'User': userId,
-                    'Events': []
-                }
-
-                $.ajax({
-                    type: 'POST',
-                    url: 'http://api.everlive.com/v1/41vzn3bx8qqhv7v0/Subscriber',
-                    contentType: "application/json",
-                    data: JSON.stringify(body),
-                    success: function (data) {
-                        resolve();
-                    },
-                    error: function (error) {
-                        reject();
-                    }
-                });
+                return createSubsciber(userId);
             })
+            .then(resolve)
             .catch(reject);
     });
 
     return promise;
+}
+
+function createSubsciber(userId) {
+    let url = 'http://api.everlive.com/v1/41vzn3bx8qqhv7v0/Subscriber'
+    let body = {
+        'User': userId,
+        'Events': []
+    }
+    let requestData = {
+        url,
+        body
+    }
+
+    return post(requestData);
 }
 
 function login(user) {
@@ -97,18 +98,17 @@ function getAllEvents() {
 
 function getSubscriberByUserId(userId) {
     let promise = new Promise(function (resolve, reject) {
-        $.ajax({
-            type: 'GET',
-            url: `http://api.everlive.com/v1/41vzn3bx8qqhv7v0/Subscriber?filter={"User":"${userId}"}`,
-            contentType: "application/json",
-            success: function (data) {
+        let url = `http://api.everlive.com/v1/41vzn3bx8qqhv7v0/Subscriber?filter={"User":"${userId}"}`;
+        let requestData = {
+            url
+        }
+
+        get(requestData)
+            .then((data) => {
                 let subscriber = data.Result[0];
                 resolve(subscriber);
-            },
-            error: function (data) {
-                reject(data);
-            }
-        });
+            })
+            .catch(reject);
     });
 
     return promise;
@@ -128,22 +128,18 @@ function addEventToSubscriber(subscriber, postID) {
 
         events.push(postID);
 
-        var object = {
-            'Events': events
+        let url = 'http://api.everlive.com/v1/41vzn3bx8qqhv7v0/Subscriber/' + subscriber.Id,
+            body = {
+                'Events': events
+            }
+        let requestData = {
+            url,
+            body
         }
 
-        $.ajax({
-            type: "PUT",
-            url: 'http://api.everlive.com/v1/41vzn3bx8qqhv7v0/Subscriber/' + subscriber.Id,
-            contentType: "application/json",
-            data: JSON.stringify(object),
-            success: function (data) {
-                resolve(data);
-            },
-            error: function (error) {
-                reject(error);
-            }
-        });
+        put(requestData)
+            .then(resolve)
+            .catch(reject);
     });
 
     return promise;
@@ -151,21 +147,21 @@ function addEventToSubscriber(subscriber, postID) {
 
 function getSubscribedEvents(subscriber) {
     let promise = new Promise(function (resolve, reject) {
-        var filter = {
+        let filter = {
             "Id": { "$in": subscriber.Events }
         };
+        let headers = {
+            "X-Everlive-Filter": JSON.stringify(filter)
+        },
+            url = `http://api.everlive.com/v1/41vzn3bx8qqhv7v0/Events`;
+        let requestData = {
+            url,
+            headers
+        }
 
-        $.ajax({
-            url: `http://api.everlive.com/v1/41vzn3bx8qqhv7v0/Events`,
-            type: "GET",
-            headers: { "X-Everlive-Filter": JSON.stringify(filter) },
-            success: function (data) {
-                resolve(data);
-            },
-            error: function (error) {
-                reject(error);
-            }
-        });
+        get(requestData)
+            .then(resolve)
+            .catch(reject);
     });
 
     return promise;

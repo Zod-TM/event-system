@@ -8,6 +8,7 @@ SystemJS.config({
         'usersController': '../../app-modules/controllers/users-controller.js',
         'homeController': '../../app-modules/controllers/home-controller.js',
         'contactController': '../../app-modules/controllers/contact-controller.js',
-        'templateLoader': '../../app-modules/template-loader.js'
+        'templateLoader': '../../app-modules/utils/template-loader.js',
+        'requester': '../../app-modules/utils/requester.js'
     }
 });
